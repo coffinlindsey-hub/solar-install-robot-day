@@ -122,9 +122,9 @@
     $('tiles').innerHTML =
       tile('Panels per day' + both, n0(a.panels.mean), range(a.panels, n0)) +
       tile('Megawatts per day', n2(a.mw.mean) + ' <small>MW</small>', range(a.mw, n2) + ', at ' + p.panelWatts + ' W a panel') +
-      tile('Robot running hours', n1(a.runningH.mean) + ' <small>of ' + p.shiftHours + ' h shift</small>', 'Placing plus travelling' + (nR > 1 ? ', per robot' : '') + '. Counting reloads too: ' + n1(a.runningReloadH.mean) + ' h.',
+      tile('Robot running hours', n1(a.runningH.mean) + ' <small>of ' + p.shiftHours + ' h shift</small>', 'Hours the robot is placing panels' + (nR > 1 ? ', per robot' : '') + '. With travelling and reloads: ' + n1(a.runningReloadH.mean) + ' h.',
         '<div class="meter"><b style="width:' + (100 * a.runningH.mean / p.shiftHours).toFixed(1) + '%"></b></div>') +
-      tile('Panels per running hour', n0(a.perRunHour.mean), 'While the robot is placing or moving') +
+      tile('Panels per running hour', n0(a.perRunHour.mean), 'Panels divided by hours spent placing') +
       tile('Panels per person hour', n1(a.perPersonHour.mean), 'Two people per robot, over the whole paid shift') +
       tile('Battery', charged ? charged + ' <small>of ' + a.n + ' days needed a charge</small>' : pct(soc) + ' <small>left at worst</small>', charged ? 'A charge does not last the shift with these settings.' : 'One charge lasts the shift on every simulated day.');
   }

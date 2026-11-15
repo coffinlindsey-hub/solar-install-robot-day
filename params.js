@@ -52,7 +52,7 @@
 
     ['Pallets and reloads', 'panelsPerPallet', 'Panels per pallet', 31, 'panels', 10, 40, 1, 'sourced', 'pallet', ''],
     ['Pallets and reloads', 'reloadGoodMin', 'Good reload, typical', 2, 'min', 0.5, 10, 0.5, 'assumption', null, 'Triangular from 0.75x to 1.5x of this.'],
-    ['Pallets and reloads', 'reloadBadLo', 'Bad reload, shortest', 10, 'min', 2, 60, 1, 'assumption', null, 'Damaged panel on top, or the forklift cannot set the pallet cleanly.'],
+    ['Pallets and reloads', 'reloadBadLo', 'Bad reload, shortest', 10, 'min', 2, 60, 1, 'assumption', null, 'Many causes: a damaged pallet, a damaged panel on top, or the forklift cannot set the pallet cleanly.'],
     ['Pallets and reloads', 'reloadBadHi', 'Bad reload, longest', 20, 'min', 2, 90, 1, 'assumption', null, ''],
     ['Pallets and reloads', 'badReloadPct', 'Share of reloads that go badly', 15, '%', 0, 100, 1, 'assumption', null, ''],
     ['Pallets and reloads', 'callAhead', 'Forklift is called with this many panels left', 6, 'panels', 0, 20, 1, 'assumption', null, ''],

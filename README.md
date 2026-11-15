@@ -27,7 +27,7 @@ It is a learning tool for questions about where a robot's day goes and what limi
 - Times are drawn from distributions, mostly triangular (fastest, typical, slowest). Rare events have a chance per panel or per day.
 - Each scenario runs for 30 days with different random seeds. Results are shown as an average with the lowest and highest day. Scenarios share seeds, so each one faces the same luck.
 - The page shows a hand calculation of the most panels possible if nothing ever stopped, next to the simulated result, and splits the gap by where the time went.
-- It also reports robot running hours apart from shift hours, availability, performance and quality (the three parts of overall equipment effectiveness), and a comparison with a manual crew of the same size.
+- It also reports robot running hours (hours spent placing panels) apart from shift hours, availability, performance and quality (the three parts of overall equipment effectiveness), and a comparison with a manual crew of the same size.
 
 ## Scenarios included
 
