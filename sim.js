@@ -513,7 +513,7 @@
         mw: (panels * p.panelWatts) / 1e6,
         time, sub,
         runningH: time.place / 3600,
-        runningReloadH: (time.place + time.travel + time.reload) / 3600,
+        runningReloadH: (time.place + time.crew) / 3600,
         shiftH: p.shiftHours,
         forkWaitMin: forkWait / nR / 60,
         forkBusyPct: (100 * forkBusy) / (T * this.forklifts.length),

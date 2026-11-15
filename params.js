@@ -28,8 +28,8 @@
   // group, key, label, default, unit, min, max, step, tag, src, note
   const P = [
     ['Shift and crew', 'shiftHours', 'Shift length', 10, 'h', 6, 12, 0.5, 'assumption', null, 'Paid hours on site.'],
-    ['Shift and crew', 'startupMin', 'Start of shift briefing and checks', 30, 'min', 0, 60, 5, 'assumption', null, 'Safety talk, stretch, walk round the machine. Robot is idle at the depot.'],
-    ['Shift and crew', 'wrapUpMin', 'End of shift wrap up', 15, 'min', 0, 60, 5, 'assumption', null, 'Robot is back at the depot this long before the shift ends.'],
+    ['Shift and crew', 'startupMin', 'Start of shift briefing and checks', 15, 'min', 0, 60, 5, 'assumption', null, 'Safety talk, stretch, walk round the machine. Robot is idle at the depot.'],
+    ['Shift and crew', 'wrapUpMin', 'End of shift wrap up', 10, 'min', 0, 60, 5, 'assumption', null, 'Robot is back at the depot this long before the shift ends.'],
     ['Shift and crew', 'lunchMin', 'Lunch', 30, 'min', 0, 60, 5, 'assumption', null, 'Taken about half way through the shift.'],
     ['Shift and crew', 'shortBreakMin', 'Each short break (two per shift)', 15, 'min', 0, 30, 5, 'assumption', null, 'At a quarter and three quarters of the shift.'],
     ['Shift and crew', 'staggerBreaks', 'Stagger breaks so the robot keeps running', 0, 'on/off', 0, 1, 1, 'setting', null, 'The two people take breaks one after the other. One person covers both jobs meanwhile.'],
@@ -44,10 +44,10 @@
     ['Robot cycle', 'driveSpeed', 'Driving speed between rows and to the depot', 1.0, 'm/s', 0.3, 3, 0.1, 'assumption', null, 'Walking pace, because a person walks with it.'],
     ['Robot cycle', 'rowAlignMode', 'Line up on a new row, typical', 60, 's', 0, 600, 10, 'assumption', null, 'Triangular from 0.5x to 2x of this, on top of the drive around the row end.'],
 
-    ['Crew fastening', 'fastenMin', 'Check and fasten one panel, fastest', 18, 's', 5, 120, 1, 'assumption', null, ''],
-    ['Crew fastening', 'fastenMode', 'Check and fasten one panel, typical', 26, 's', 5, 120, 1, 'assumption', null, ''],
-    ['Crew fastening', 'fastenMax', 'Check and fasten one panel, slowest', 40, 's', 5, 240, 1, 'assumption', null, ''],
-    ['Crew fastening', 'maxAhead', 'Panels the robot may get ahead of the fastener', 3, 'panels', 1, 12, 1, 'assumption', null, 'Unfastened panels are a wind risk, so the robot waits when this many are loose.'],
+    ['Crew fastening', 'fastenMin', 'Check and fasten one panel, fastest', 34, 's', 5, 120, 1, 'assumption', null, ''],
+    ['Crew fastening', 'fastenMode', 'Check and fasten one panel, typical', 44, 's', 5, 120, 1, 'assumption', null, ''],
+    ['Crew fastening', 'fastenMax', 'Check and fasten one panel, slowest', 56, 's', 5, 240, 1, 'assumption', null, ''],
+    ['Crew fastening', 'maxAhead', 'Panels the robot may get ahead of the fastener', 3, 'panels', 1, 12, 1, 'assumption', null, 'Unfastened panels are a wind risk, so the robot waits when this many are loose. At the defaults the robot is faster than the fastener.'],
     ['Crew fastening', 'reworkPct', 'Panels the crew has to reseat', 2, '%', 0, 30, 0.5, 'assumption', null, 'Placed slightly off. Adds 30 to 120 s of crew time and counts against quality.'],
 
     ['Pallets and reloads', 'panelsPerPallet', 'Panels per pallet', 31, 'panels', 10, 40, 1, 'sourced', 'pallet', ''],

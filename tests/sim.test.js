@@ -7,7 +7,7 @@ const Params = require('../params.js');
 
 const P = (set) => Object.assign(Params.defaults(), set || {});
 const day = (set, seed) => new Sim.Simulation(P(set), seed || 3).run();
-const CLEAN = { badReloadPct: 0, visionFaultPct: 0, rackingPct: 0, damagedPct: 0, weatherPerDay: 0, repositionPct: 0, reworkPct: 0 };
+const CLEAN = { fastenMin: 10, fastenMode: 12, fastenMax: 14, badReloadPct: 0, visionFaultPct: 0, rackingPct: 0, damagedPct: 0, weatherPerDay: 0, repositionPct: 0, reworkPct: 0 };
 
 test('random distributions have the right averages', () => {
   const rng = Sim.dist.mulberry32(42);

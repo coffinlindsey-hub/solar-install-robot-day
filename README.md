@@ -53,9 +53,9 @@ Every number is either a cited public figure or a labeled assumption. Nothing co
 
 ### Assumptions, with their defaults
 
-- Shift: 10 hours, a 30 minute lunch, two 15 minute breaks, 30 minutes of briefing and checks at the start, 15 minutes of wrap up.
+- Shift: 10 hours, a 30 minute lunch, two 15 minute breaks, 15 minutes of briefing and checks at the start, 10 minutes of wrap up.
 - Pick and place: 30 to 40 seconds a panel, typically 35. Two panels per stop, then about 8 seconds to move forward. 3 percent of stops need a second try.
-- Fastening: 18 to 40 seconds a panel, typically 26, by one person. The robot may be 3 panels ahead. 2 percent of panels need reseating.
+- Fastening: 34 to 56 seconds a panel, typically 44, by one person, which is slower than the robot. The robot may be 3 panels ahead and then waits. 2 percent of panels need reseating.
 - Reloads: about 2 minutes when good, 10 to 20 minutes when bad, 15 percent bad. Forklift called with 6 panels left, about 1.5 minutes to pick up a pallet, 2.5 m/s on site.
 - Faults per panel: 1.5 percent vision or placement, 1 percent racking out of tolerance, 0.3 percent damaged panel. Each costs a few minutes.
 - Weather: a hold on about one day in four, typically 30 minutes.
