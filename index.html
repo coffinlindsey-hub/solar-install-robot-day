@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A day with a solar installation robot</title>
+<meta name="description" content="A simulation of one shift of a robot assisted solar installation crew, shown in 3D and built from public sources.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Discrete event simulation, built from public sources</p>
+  <h1>A day with a solar installation robot</h1>
+  <p class="lede">One rover with an arm, two people and a forklift, across a full shift on a utility scale solar site. The engine works out the day one event at a time. The 3D view plays back exactly what the engine recorded, and the numbers below are sums over the same record.</p>
+</header>
+
+<section class="card stagecard" aria-label="3D view of the shift">
+  <div class="row scen" id="scenRow" role="group" aria-label="Scenarios"></div>
+  <p class="note" id="scenWhy"></p>
+
+  <div class="stage" id="stage">
+    <div class="host" id="host"></div>
+    <div class="hud" id="hud" aria-live="off">
+      <div class="clock"><b id="hClock">0:00</b><span id="hOf">of 10 h</span></div>
+      <div class="chip" id="hState"><i></i><span>Idle</span></div>
+      <dl>
+        <div><dt>Panels placed</dt><dd id="hPanels">0</dd></div>
+        <div><dt>Megawatts</dt><dd id="hMw">0.00</dd></div>
+        <div><dt>Left on pallet</dt><dd id="hStack">31</dd></div>
+        <div><dt>Battery</dt><dd id="hSoc">100%</dd></div>
+      </dl>
+    </div>
+    <div class="views" role="group" aria-label="Camera">
+      <button class="btn small ghost" data-view="drone">Drone</button>
+      <button class="btn small ghost on" data-view="follow">Follow</button>
+      <button class="btn small ghost" data-view="arm">Arm</button>
+      <button class="btn small ghost" id="robotBtn" hidden>Robot 1</button>
+      <button class="btn small ghost" id="fullBtn" aria-label="Full screen">Full screen</button>
+    </div>
+    <p class="hint" id="hint">Drag to turn. Click, then scroll to zoom. Pinch on a phone.</p>
+  </div>
+
+  <div class="controls">
+    <button class="btn" id="playBtn" aria-label="Play or pause">Play</button>
+    <label class="speed">Speed
+      <select id="speedSel">
+        <option value="1">Real time</option>
+        <option value="5">5x</option>
+        <option value="20" selected>20x</option>
+        <option value="60">1 minute per second</option>
+        <option value="200">200x</option>
+        <option value="600">Whole day in a minute</option>
+      </select>
+    </label>
+    <div class="scrub">
+      <canvas id="strip" height="14" aria-hidden="true"></canvas>
+      <input type="range" id="scrub" min="0" max="36000" step="1" value="0" aria-label="Time in the shift">
+    </div>
+  </div>
+  <div class="legend" id="legend"></div>
+  <div class="row tight dayrow">
+    <span class="fine" id="dayNote"></span>
+    <label class="fine">Day shown
+      <select id="daySel">
+        <option value="typical">A typical day</option>
+        <option value="best">The best day</option>
+        <option value="worst">The worst day</option>
+      </select>
+    </label>
+  </div>
+</section>
+
+<section class="card" id="results">
+  <div class="head"><h2>Results</h2><span class="status" id="runNote"></span></div>
+  <p class="note">Each figure is the average over the simulated days, with the lowest and highest day beside it. One day on its own can mislead, because a single weather hold or a run of bad reloads moves it a long way.</p>
+  <div class="tiles" id="tiles"></div>
+  <div class="callout" id="loss"></div>
+</section>
+
+<section class="card">
+  <h2>Where the robot's day goes</h2>
+  <p class="note">Average hours per robot in each state. The states add up to the shift.</p>
+  <div id="breakdown"></div>
+</section>
+
+<section class="card">
+  <h2>Hand calculation against the simulation</h2>
+  <p class="note">A model should be checked against arithmetic you can do on paper. The first rows use only averages. The gap between the paper number and the simulated number is then split by where the time went.</p>
+  <div id="hand"></div>
+</section>
+
+<section class="card">
+  <h2>Overall equipment effectiveness</h2>
+  <p class="note">OEE is one number made of three. Availability asks: of the time we planned to run, how much did we run? Performance asks: while running, how close to the ideal rate were we? Quality asks: how many panels were right first time? Multiply the three.</p>
+  <div id="oee"></div>
+</section>
+
+<section class="card">
+  <h2>Robot and crew against a manual crew</h2>
+  <p class="note">The manual crew is a simple calculation, not a simulation: people, times a rate, times the hours worked. Public rates for manual crews disagree widely, so the published range is shown as well as the rate you set. The forklift driver is left out on both sides.</p>
+  <div id="manual"></div>
+</section>
+
+<section class="card">
+  <div class="head"><h2>Compare scenarios</h2>
+    <div class="row tight"><button class="btn small" id="saveA">Save this as A</button><button class="btn small ghost" id="clearA" hidden>Clear A</button></div>
+  </div>
+  <p class="note">Save the current settings as A, change anything, and the page shows A beside the new run as B. Every scenario uses the same random seeds, so both face the same luck.</p>
+  <div id="compare"></div>
+  <h3>The six prebuilt scenarios side by side</h3>
+  <div id="allScen"></div>
+</section>
+
+<section class="card">
+  <div class="head"><h2>Every parameter</h2><button class="btn small ghost" id="resetBtn">Back to defaults</button></div>
+  <p class="note">Each number shows its default, its unit and where it came from. <span class="tag sourced">sourced</span> is a public figure with a link. <span class="tag assumption">assumption</span> is a placeholder with no public figure behind it. <span class="tag setting">setting</span> is a choice about the experiment.</p>
+  <div id="params"></div>
+</section>
+
+<section class="card prose">
+  <h2>Why the times are distributions, not fixed numbers</h2>
+  <ul>
+    <li>No two cycles take the same time. If every pick took exactly 35 seconds, the robot and the person fastening would never get in each other's way, and no day would differ from the next.</li>
+    <li>Averages hide queues. A person who fastens in 29 seconds on average keeps up with a 39 second robot on average, but not during a run of slow panels. Waiting only shows up when times vary.</li>
+    <li>Rare, long events decide the day. One bad reload in seven costs more than all the good ones together. A fixed "average reload" would smear that into every pallet and hide it.</li>
+    <li>So each time is drawn from a triangle: a fastest, a typical and a slowest value. Rare events get a chance of happening. The model then runs many days with different random seeds and reports the average and the range.</li>
+  </ul>
+</section>
+
+<section class="card prose">
+  <h2>Assumptions, all in one place</h2>
+  <p class="note">Everything below is a placeholder chosen to be plausible. None of it is measured, and none of it comes from any company.</p>
+  <ul id="assumptions"></ul>
+  <h3>What this does not model</h3>
+  <ul>
+    <li>Fastening as anything more than one person and a time per panel. No torque checks, clips or wiring.</li>
+    <li>Terrain. The site is flat, and the rover never gets stuck.</li>
+    <li>Traffic. Robots, forklifts and people never block each other in an aisle.</li>
+    <li>Pallet supply. The staging area never runs out, and trucks always arrive.</li>
+    <li>Learning. The crew is as fast in the first hour as in the last, and on the first day as on the fortieth.</li>
+    <li>Weather as a forecast. Holds arrive at random, with no seasons and no link between wind and time of day.</li>
+    <li>Breaks and holds starting mid task. They begin when the current task ends.</li>
+    <li>Cost, safety incidents, and commissioning the robot on a new site.</li>
+    <li>Any real machine. The shapes in the 3D view are generic stand ins.</li>
+  </ul>
+  <h3>Sources</h3>
+  <ul id="sources"></ul>
+</section>
+
+<footer class="fine foot">A learning tool, not a model of any real site or product. Every number is a cited public figure or a labeled assumption.</footer>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="params.js"></script>
+<script src="sim.js"></script>
+<script src="scene3d.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
